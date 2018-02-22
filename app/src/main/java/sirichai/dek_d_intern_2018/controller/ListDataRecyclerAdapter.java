@@ -7,11 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import sirichai.dek_d_intern_2018.ItemClickListener;
 import sirichai.dek_d_intern_2018.R;
 import sirichai.dek_d_intern_2018.model.ListData;
 
@@ -36,7 +38,7 @@ public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecycl
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         ListData listData = listDatas.get(position);
 
         Picasso.with(context).load(listData.getImg()).placeholder(R.mipmap.ic_launcher)
@@ -44,6 +46,21 @@ public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecycl
                 .into(holder.logoImg);
         holder.titleTv.setText(listData.getTitle());
         holder.messageTv.setText(listData.getMessage());
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongClick) {
+                if (isLongClick) {
+                    removeItem(position);
+                    Toast.makeText(view.getContext(), "lc" + position, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            private void removeItem(int position) {
+                listDatas.remove(position);
+                notifyItemRemoved(position);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -51,11 +68,13 @@ public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecycl
         return listDatas.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         public ImageView logoImg;
         public TextView titleTv;
         public TextView messageTv;
+        private ItemClickListener itemClickListener;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -63,6 +82,26 @@ public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecycl
             logoImg = itemView.findViewById(R.id.logoImg);
             titleTv = itemView.findViewById(R.id.titleTv);
             messageTv = itemView.findViewById(R.id.messageTv);
+
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            itemClickListener.onClick(v, getAdapterPosition(), false);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            itemClickListener.onClick(v, getAdapterPosition(), true);
+            return false;
+        }
+
+        public void setItemClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
+        }
+
+
     }
 }

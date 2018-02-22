@@ -1,11 +1,11 @@
 package sirichai.dek_d_intern_2018;
 
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatDialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +15,7 @@ import android.widget.EditText;
  * Created by atomiz on 22/2/2561.
  */
 
-public class AddDataDialog extends AppCompatDialogFragment {
+public class AddDataDialog extends DialogFragment {
 
     private EditText mImgUrlInput;
     private EditText mTitleInput;
@@ -36,7 +36,6 @@ public class AddDataDialog extends AppCompatDialogFragment {
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                     }
                 })
                 .setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
@@ -56,7 +55,7 @@ public class AddDataDialog extends AppCompatDialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            addDataDialogListener = (AddDataDialogListener) context;
+            addDataDialogListener = (AddDataDialogListener) getTargetFragment();
         } catch (ClassCastException e) {
             Log.e("addDataDialogListener", e.toString());
         }
