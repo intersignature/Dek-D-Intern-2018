@@ -1,6 +1,10 @@
 package sirichai.dek_d_intern_2018.controller;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +19,7 @@ import java.util.List;
 
 import sirichai.dek_d_intern_2018.ItemClickListener;
 import sirichai.dek_d_intern_2018.R;
+import sirichai.dek_d_intern_2018.ShowSpecificData;
 import sirichai.dek_d_intern_2018.model.ListData;
 
 /**
@@ -52,6 +57,20 @@ public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecycl
                 if (isLongClick) {
                     removeItem(position);
                     Toast.makeText(view.getContext(), "lc" + position, Toast.LENGTH_SHORT).show();
+                } else {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("specImgLink", listDatas.get(position).getImg());
+                    bundle.putString("specTitle", listDatas.get(position).getTitle());
+                    bundle.putString("specMessage", listDatas.get(position).getMessage());
+
+                    ShowSpecificData showSpecificData = new ShowSpecificData();
+                    showSpecificData.setArguments(bundle);
+
+                    FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.frameContainerMain, showSpecificData);
+                    fragmentTransaction.commit();
+
                 }
             }
 

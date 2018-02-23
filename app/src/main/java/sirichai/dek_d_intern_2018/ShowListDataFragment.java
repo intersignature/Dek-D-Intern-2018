@@ -24,7 +24,6 @@ public class ShowListDataFragment extends Fragment implements AddDataDialog.AddD
 
     private RecyclerView listDataRecycler;
     private RecyclerView.Adapter listDataRecyclerAdapter;
-
     private List<ListData> listDatas;
 
     public ShowListDataFragment() {
@@ -43,7 +42,10 @@ public class ShowListDataFragment extends Fragment implements AddDataDialog.AddD
         listDataRecycler.setHasFixedSize(true);
         listDataRecycler.setLayoutManager(new LinearLayoutManager(v.getContext()));
 
+        //test load img zone
         listDatas = new ArrayList<>();
+        ListData listData = new ListData("http://bit.ly/2ERgiVm", "dsfdsf", "fdsfdsf");
+        listDatas.add(listData);
 
         listDataRecyclerAdapter = new ListDataRecyclerAdapter(listDatas, v.getContext());
         listDataRecycler.setAdapter(listDataRecyclerAdapter);
@@ -64,6 +66,7 @@ public class ShowListDataFragment extends Fragment implements AddDataDialog.AddD
         listDataRecycler.setAdapter(listDataRecyclerAdapter);
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -71,4 +74,5 @@ public class ShowListDataFragment extends Fragment implements AddDataDialog.AddD
                 openInputDialog();
         }
     }
+
 }
