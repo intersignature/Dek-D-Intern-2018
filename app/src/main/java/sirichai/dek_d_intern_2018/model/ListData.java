@@ -1,5 +1,10 @@
 package sirichai.dek_d_intern_2018.model;
 
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by atomiz on 22/2/2561.
  */
@@ -37,5 +42,17 @@ public class ListData {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public JSONObject getJSONObject() {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("Img", img);
+            obj.put("Title", title);
+            obj.put("Message", message);
+        } catch (JSONException e) {
+            Log.e("convertJson", e.toString());
+        }
+        return obj;
     }
 }

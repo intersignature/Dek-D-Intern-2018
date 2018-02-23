@@ -19,6 +19,12 @@
                 android:id="@+id/dataRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/showJsonTv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="" />
         </LinearLayout>
     </ScrollView>
 

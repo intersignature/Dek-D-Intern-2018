@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ import sirichai.dek_d_intern_2018.model.ListData;
  */
 public class ShowListDataFragment extends Fragment implements AddDataDialog.AddDataDialogListener, View.OnClickListener {
 
+    private TextView showJsonTv;
     private RecyclerView listDataRecycler;
     private RecyclerView.Adapter listDataRecyclerAdapter;
     private List<ListData> listDatas;
@@ -30,13 +32,14 @@ public class ShowListDataFragment extends Fragment implements AddDataDialog.AddD
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_show_list_data, container, false);
         FloatingActionButton fab = v.findViewById(R.id.fab);
+        showJsonTv = v.findViewById(R.id.showJsonTv);
         fab.setOnClickListener(this);
         listDataRecycler = v.findViewById(R.id.dataRecyclerView);
         listDataRecycler.setHasFixedSize(true);
@@ -44,10 +47,10 @@ public class ShowListDataFragment extends Fragment implements AddDataDialog.AddD
 
         //test load img zone
         listDatas = new ArrayList<>();
-        ListData listData = new ListData("http://bit.ly/2ERgiVm", "dsfdsf", "fdsfdsf");
-        listDatas.add(listData);
+//        ListData listData = new ListData("http://bit.ly/2ERgiVm", "dsfdsf", "fdsfdsf");
+//        listDatas.add(listData);
 
-        listDataRecyclerAdapter = new ListDataRecyclerAdapter(listDatas, v.getContext());
+        listDataRecyclerAdapter = new ListDataRecyclerAdapter(listDatas, v.getContext(), showJsonTv);
         listDataRecycler.setAdapter(listDataRecyclerAdapter);
         return v;
     }
@@ -62,10 +65,9 @@ public class ShowListDataFragment extends Fragment implements AddDataDialog.AddD
     public void getInputData(String imgUrl, String title, String message) {
         ListData newLisetDataInput = new ListData(imgUrl, title, message);
         listDatas.add(0, newLisetDataInput);
-        listDataRecyclerAdapter = new ListDataRecyclerAdapter(listDatas, getActivity());
+        listDataRecyclerAdapter = new ListDataRecyclerAdapter(listDatas, getActivity(), showJsonTv);
         listDataRecycler.setAdapter(listDataRecyclerAdapter);
     }
-
 
     @Override
     public void onClick(View v) {
@@ -74,5 +76,4 @@ public class ShowListDataFragment extends Fragment implements AddDataDialog.AddD
                 openInputDialog();
         }
     }
-
 }

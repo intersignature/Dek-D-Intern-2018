@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+
 import java.util.List;
 
 import sirichai.dek_d_intern_2018.ItemClickListener;
@@ -30,21 +32,25 @@ public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecycl
 
     private List<ListData> listDatas;
     private Context context;
+    private TextView showJsonTv;
 
-    public ListDataRecyclerAdapter(List<ListData> listDatas, Context context) {
+    public ListDataRecyclerAdapter(List<ListData> listDatas, Context context, TextView showJsonTv) {
         this.listDatas = listDatas;
         this.context = context;
+        this.showJsonTv = showJsonTv;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.data_item, parent, false);
+
+        updateJsonString();
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        ListData listData = listDatas.get(position);
+        final ListData listData = listDatas.get(position);
 
         Picasso.with(context).load(listData.getImg()).placeholder(R.mipmap.ic_launcher)
                 .error(R.mipmap.ic_launcher)
@@ -78,6 +84,7 @@ public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecycl
                 listDatas.remove(position);
                 notifyItemRemoved(position);
                 notifyDataSetChanged();
+                updateJsonString();
             }
         });
     }
@@ -87,6 +94,13 @@ public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecycl
         return listDatas.size();
     }
 
+    private void updateJsonString() {
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < listDatas.size(); i++) {
+            jsonArray.put(listDatas.get(i).getJSONObject());
+        }
+        showJsonTv.setText(jsonArray.toString());
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
@@ -120,7 +134,5 @@ public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecycl
         public void setItemClickListener(ItemClickListener itemClickListener) {
             this.itemClickListener = itemClickListener;
         }
-
-
     }
 }

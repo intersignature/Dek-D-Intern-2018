@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by atomiz on 22/2/2561.
@@ -44,7 +45,11 @@ public class AddDataDialog extends DialogFragment {
                         String imgUrl = mImgUrlInput.getText().toString();
                         String title = mTitleInput.getText().toString();
                         String message = mMessageInput.getText().toString();
-                        addDataDialogListener.getInputData(imgUrl, title, message);
+                        if (imgUrl.equals("") || title.equals("") || message.equals("")) {
+                            Toast.makeText(getActivity(), "Please fill in the blank", Toast.LENGTH_SHORT).show();
+                        } else {
+                            addDataDialogListener.getInputData(imgUrl, title, message);
+                        }
                     }
                 });
 
