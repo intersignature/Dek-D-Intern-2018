@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,9 +53,13 @@ public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecycl
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final ListData listData = listDatas.get(position);
 
-        Picasso.with(context).load(listData.getImg()).placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
-                .into(holder.logoImg);
+        try {
+            Picasso.with(context).load(listData.getImg()).placeholder(R.mipmap.ic_launcher)
+                    .error(R.mipmap.ic_launcher)
+                    .into(holder.logoImg);
+        } catch (Exception e) {
+            Log.e("LoadLogoInRecycler", e.toString());
+        }
         holder.titleTv.setText(listData.getTitle());
         holder.messageTv.setText(listData.getMessage());
         holder.setItemClickListener(new ItemClickListener() {

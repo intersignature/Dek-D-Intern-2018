@@ -3,9 +3,11 @@ package sirichai.dek_d_intern_2018;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,14 +47,22 @@ public class ShowListDataFragment extends Fragment implements AddDataDialog.AddD
         listDataRecycler.setHasFixedSize(true);
         listDataRecycler.setLayoutManager(new LinearLayoutManager(v.getContext()));
 
-        //test load img zone
-        listDatas = new ArrayList<>();
-//        ListData listData = new ListData("http://bit.ly/2ERgiVm", "dsfdsf", "fdsfdsf");
-//        listDatas.add(listData);
+        if (savedInstanceState == null) {
+            listDatas = new ArrayList<>();
+        } else {
+            listDatas = savedInstanceState.getParcelableArrayList("key");
+        }
 
         listDataRecyclerAdapter = new ListDataRecyclerAdapter(listDatas, v.getContext(), showJsonTv);
         listDataRecycler.setAdapter(listDataRecyclerAdapter);
         return v;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.e("dfssdf", listDatas.toString());
+        outState.putParcelableArrayList("key", (ArrayList<? extends Parcelable>) listDatas);
     }
 
     private void openInputDialog() {

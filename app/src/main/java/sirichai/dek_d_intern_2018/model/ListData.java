@@ -1,5 +1,7 @@
 package sirichai.dek_d_intern_2018.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -9,7 +11,18 @@ import org.json.JSONObject;
  * Created by atomiz on 22/2/2561.
  */
 
-public class ListData {
+public class ListData implements Parcelable {
+    public static final Creator<ListData> CREATOR = new Creator<ListData>() {
+        @Override
+        public ListData createFromParcel(Parcel in) {
+            return new ListData(in);
+        }
+
+        @Override
+        public ListData[] newArray(int size) {
+            return new ListData[size];
+        }
+    };
     private String img;
     private String title;
     private String message;
@@ -18,6 +31,12 @@ public class ListData {
         this.img = img;
         this.title = title;
         this.message = message;
+    }
+
+    protected ListData(Parcel in) {
+        img = in.readString();
+        title = in.readString();
+        message = in.readString();
     }
 
     public String getImg() {
@@ -54,5 +73,17 @@ public class ListData {
             Log.e("convertJson", e.toString());
         }
         return obj;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(img);
+        dest.writeString(title);
+        dest.writeString(message);
     }
 }

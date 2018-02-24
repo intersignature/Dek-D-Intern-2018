@@ -3,6 +3,7 @@ package sirichai.dek_d_intern_2018;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,6 @@ public class ShowSpecificData extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,9 +45,13 @@ public class ShowSpecificData extends Fragment {
         title = bundle.getString("specTitle");
         message = bundle.getString("specMessage");
 
-        Picasso.with(view.getContext()).load(imgLink).placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
-                .into(logoSpecImg);
+        try {
+            Picasso.with(view.getContext()).load(imgLink).placeholder(R.mipmap.ic_launcher)
+                    .error(R.mipmap.ic_launcher)
+                    .into(logoSpecImg);
+        } catch (Exception e) {
+            Log.e("LoadLogoInSpecFragment", e.toString());
+        }
         titleSpecTv.setText(title);
         messageSpecTv.setText(message);
         return view;

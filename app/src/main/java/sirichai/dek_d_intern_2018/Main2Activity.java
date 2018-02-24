@@ -15,11 +15,12 @@ public class Main2Activity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameContainerMain, new ShowListDataFragment());
-        fragmentTransaction.addToBackStack(null).commit();
 
+        if (savedInstanceState == null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frameContainerMain, new ShowListDataFragment());
+            fragmentTransaction.commit();
+        }
     }
-
 }
