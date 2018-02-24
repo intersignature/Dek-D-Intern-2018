@@ -5,32 +5,44 @@
     android:orientation="vertical"
     tools:context="sirichai.dek_d_intern_2018.ShowSpecificData">
 
-    <!-- TODO: Update blank fragment layout -->
-
-
-    <ImageView
-        android:id="@+id/logoSpecImg"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:src="@mipmap/ic_launcher" />
-
-    <TextView
-        android:id="@+id/titleSpecTv"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:padding="5dp"
-        android:text="TextView" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/messageSpecTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:padding="5dp"
-        android:text="TextView" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="3dp">
+
+            <ImageView
+                android:id="@+id/logoSpecImg"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:contentDescription="@string/image_logo"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/titleSpecTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/messageSpecTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="" />
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

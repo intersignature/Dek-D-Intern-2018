@@ -3,5 +3,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main2">Dek-D-Intern-2018</string>
+    <string name="input_data">Input data</string>
+    <string name="image_url">Image URL</string>
+    <string name="title">Title</string>
+    <string name="message">Message</string>
+    <string name="image_logo">Image Logo</string>
+    <string name="android_oreo">Android OreO</string>
+    <string name="description">description</string>
 </resources>
