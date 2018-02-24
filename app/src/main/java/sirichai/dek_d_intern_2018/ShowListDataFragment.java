@@ -46,7 +46,6 @@ public class ShowListDataFragment extends Fragment implements AddDataDialog.AddD
         listDataRecycler = v.findViewById(R.id.dataRecyclerView);
         listDataRecycler.setHasFixedSize(true);
         listDataRecycler.setLayoutManager(new LinearLayoutManager(v.getContext()));
-
         if (savedInstanceState == null) {
             listDatas = new ArrayList<>();
         } else {

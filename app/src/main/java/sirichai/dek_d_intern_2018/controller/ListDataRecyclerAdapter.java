@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -34,7 +34,7 @@ public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecycl
     private List<ListData> listDatas;
     private Context context;
     private TextView showJsonTv;
-
+    private String changeLenghtOfMessage;
     public ListDataRecyclerAdapter(List<ListData> listDatas, Context context, TextView showJsonTv) {
         this.listDatas = listDatas;
         this.context = context;
@@ -61,13 +61,26 @@ public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecycl
             Log.e("LoadLogoInRecycler", e.toString());
         }
         holder.titleTv.setText(listData.getTitle());
-        holder.messageTv.setText(listData.getMessage());
+        if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (listData.getMessage().length() < 32) {
+                holder.messageTv.setText(listData.getMessage());
+            } else {
+                changeLenghtOfMessage = listData.getMessage().substring(0, Math.min(listData.getMessage().length(), 29));
+                holder.messageTv.setText(changeLenghtOfMessage + "...");
+            }
+        } else {
+            if (listData.getMessage().length() < 59) {
+                holder.messageTv.setText(listData.getMessage());
+            } else {
+                changeLenghtOfMessage = listData.getMessage().substring(0, Math.min(listData.getMessage().length(), 56));
+                holder.messageTv.setText(changeLenghtOfMessage + "...");
+            }
+        }
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
                 if (isLongClick) {
                     removeItem(position);
-                    Toast.makeText(view.getContext(), "lc" + position, Toast.LENGTH_SHORT).show();
                 } else {
                     Bundle bundle = new Bundle();
                     bundle.putString("specImgLink", listDatas.get(position).getImg());
