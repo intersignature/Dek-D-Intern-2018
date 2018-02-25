@@ -45,11 +45,6 @@ public class AddDataDialog extends DialogFragment {
                         String title = mTitleInput.getText().toString();
                         String message = mMessageInput.getText().toString();
                         addDataDialogListener.getInputData(imgUrl, title, message);
-//                        if (imgUrl.equals("") || title.equals("") || message.equals("")) {
-//                            Toast.makeText(getActivity(), "Please fill in the blank", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            addDataDialogListener.getInputData(imgUrl, title, message);
-//                        }
                     }
                 });
 
@@ -64,7 +59,6 @@ public class AddDataDialog extends DialogFragment {
         } catch (ClassCastException e) {
             Log.e("addDataDialogListener", e.toString());
         }
-
     }
 
     public interface AddDataDialogListener {

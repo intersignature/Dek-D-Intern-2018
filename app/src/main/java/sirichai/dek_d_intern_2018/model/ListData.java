@@ -12,6 +12,7 @@ import org.json.JSONObject;
  */
 
 public class ListData implements Parcelable {
+
     public static final Creator<ListData> CREATOR = new Creator<ListData>() {
         @Override
         public ListData createFromParcel(Parcel in) {

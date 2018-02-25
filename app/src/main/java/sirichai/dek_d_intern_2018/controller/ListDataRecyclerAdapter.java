@@ -93,8 +93,7 @@ public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecycl
                     FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.frameContainerMain, showSpecificData);
-                    fragmentTransaction.commit();
-
+                    fragmentTransaction.addToBackStack(null).commit();
                 }
             }
 

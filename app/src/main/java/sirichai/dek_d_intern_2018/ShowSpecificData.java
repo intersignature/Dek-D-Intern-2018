@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */

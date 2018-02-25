@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +33,15 @@ public class ShowListDataFragment extends Fragment implements AddDataDialog.AddD
         // Required empty public constructor
     }
 
+    public static ShowListDataFragment newInstance(List<ListData> listDatas) {
+
+        Bundle args = new Bundle();
+        ShowListDataFragment fragment = new ShowListDataFragment();
+        args.putParcelableArrayList("listDatasArg", (ArrayList<? extends Parcelable>) listDatas);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,11 +54,7 @@ public class ShowListDataFragment extends Fragment implements AddDataDialog.AddD
         listDataRecycler = v.findViewById(R.id.dataRecyclerView);
         listDataRecycler.setHasFixedSize(true);
         listDataRecycler.setLayoutManager(new LinearLayoutManager(v.getContext()));
-        if (savedInstanceState == null) {
-            listDatas = new ArrayList<>();
-        } else {
-            listDatas = savedInstanceState.getParcelableArrayList("key");
-        }
+        listDatas = getArguments().getParcelableArrayList("listDatasArg");
 
         listDataRecyclerAdapter = new ListDataRecyclerAdapter(listDatas, v.getContext(), showJsonTv);
         listDataRecycler.setAdapter(listDataRecyclerAdapter);
@@ -60,8 +64,7 @@ public class ShowListDataFragment extends Fragment implements AddDataDialog.AddD
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.e("dfssdf", listDatas.toString());
-        outState.putParcelableArrayList("key", (ArrayList<? extends Parcelable>) listDatas);
+        outState.putParcelableArrayList("listDatasArg", (ArrayList<? extends Parcelable>) listDatas);
     }
 
     private void openInputDialog() {
@@ -72,8 +75,8 @@ public class ShowListDataFragment extends Fragment implements AddDataDialog.AddD
 
     @Override
     public void getInputData(String imgUrl, String title, String message) {
-        ListData newLisetDataInput = new ListData(imgUrl, title, message);
-        listDatas.add(0, newLisetDataInput);
+        ListData newListDataInput = new ListData(imgUrl, title, message);
+        listDatas.add(0, newListDataInput);
         listDataRecyclerAdapter = new ListDataRecyclerAdapter(listDatas, getActivity(), showJsonTv);
         listDataRecycler.setAdapter(listDataRecyclerAdapter);
     }
