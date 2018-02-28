@@ -7,10 +7,6 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by atomiz on 22/2/2561.
- */
-
 public class ListData implements Parcelable {
 
     public static final Creator<ListData> CREATOR = new Creator<ListData>() {
@@ -34,7 +30,7 @@ public class ListData implements Parcelable {
         this.message = message;
     }
 
-    protected ListData(Parcel in) {
+    private ListData(Parcel in) {
         img = in.readString();
         title = in.readString();
         message = in.readString();

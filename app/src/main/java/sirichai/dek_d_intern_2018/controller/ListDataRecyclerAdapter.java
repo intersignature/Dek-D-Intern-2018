@@ -25,10 +25,6 @@ import sirichai.dek_d_intern_2018.R;
 import sirichai.dek_d_intern_2018.ShowSpecificData;
 import sirichai.dek_d_intern_2018.model.ListData;
 
-/**
- * Created by atomiz on 22/2/2561.
- */
-
 public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecyclerAdapter.ViewHolder> {
 
     private List<ListData> listDatas;
@@ -121,12 +117,12 @@ public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecycl
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        public ImageView logoImg;
-        public TextView titleTv;
-        public TextView messageTv;
+        private ImageView logoImg;
+        private TextView titleTv;
+        private TextView messageTv;
         private ItemClickListener itemClickListener;
 
-        public ViewHolder(View itemView) {
+        private ViewHolder(View itemView) {
             super(itemView);
 
             logoImg = itemView.findViewById(R.id.logoImg);
@@ -148,7 +144,7 @@ public class ListDataRecyclerAdapter extends RecyclerView.Adapter<ListDataRecycl
             return false;
         }
 
-        public void setItemClickListener(ItemClickListener itemClickListener) {
+        private void setItemClickListener(ItemClickListener itemClickListener) {
             this.itemClickListener = itemClickListener;
         }
     }

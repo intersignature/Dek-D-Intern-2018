@@ -11,10 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-/**
- * Created by atomiz on 22/2/2561.
- */
-
 public class AddDataDialog extends DialogFragment {
 
     private EditText mImgUrlInput;
